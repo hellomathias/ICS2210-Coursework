@@ -10,7 +10,7 @@
 //param: `upper_bound` is the upper bound of the range (exclusive)
 //return: A random number within the range [1, upper_bound]
 int GenerateRandomNumber(int upper_bound){
-    return (rand() % upper_bound + 1);
+    return (rand() % (upper_bound + 1));
 }
 
 std::vector<int> KnuthShuffle(std::vector<int> arr){
@@ -18,14 +18,9 @@ std::vector<int> KnuthShuffle(std::vector<int> arr){
     // An index separates the input array into 2. The left side being unshuffled, and the right being shuffled.
     // The algorithm then randomly picks an index from the unshuffled array to the latest shuffled arr and swaps the two.
 
-    int unshuffled_index = arr.size() - 1;
-    int pick_index = 0;
-    // unshuffled_index is the index indicating which portion of the array is unshuffled [1, n].
-
-    for (int i = unshuffled_index; i > 0; i--){
-        pick_index = GenerateRandomNumber(unshuffled_index);
-        std::swap(arr[i], arr[pick_index]);
-        unshuffled_index--;
+    for (int current_index = arr.size() - 1; current_index > 0; current_index--){
+        int random_index = GenerateRandomNumber(current_index);
+        std::swap(arr[current_index], arr[random_index]);
     }
 
     return arr;
